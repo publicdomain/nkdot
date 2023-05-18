@@ -68,6 +68,12 @@ namespace nkDotEditor
 
             // Load settings from disk
             this.settingsData = this.LoadSettingsFile(this.settingsDataPath);
+
+            // Assign settings data to property grid
+            this.propertyGrid.SelectedObject = this.settingsData;
+
+            // Initial update
+            this.UpdateSavedLabel();
         }
 
         /// <summary>
@@ -91,13 +97,29 @@ namespace nkDotEditor
         }
 
         /// <summary>
+        /// Saves the settings data.
+        /// </summary>
+        /// <param name="isSavedFlag">If set to <c>true</c> is saved flag.</param>
+        private void SaveSettingsData(bool isSavedFlag)
+        {
+            // Create new settings file
+            this.SaveSettingsFile(this.settingsDataPath, this.settingsData);
+
+            // Set flag
+            this.isSaved = isSavedFlag;
+
+            // Update label
+            this.UpdateSavedLabel();
+        }
+
+        /// <summary>
         /// Handles the options tool strip menu item drop down item clicked.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">Event arguments.</param>
         private void OnOptionsToolStripMenuItemDropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            // TODO Add code 
+            // TODO Add code
         }
 
         /// <summary>
@@ -157,7 +179,24 @@ namespace nkDotEditor
         /// <param name="e">Event arguments.</param>
         private void OnMainFormFormClosing(object sender, FormClosingEventArgs e)
         {
-            // TODO Add code
+            // Check saved flag
+            if (this.isSaved == false)
+            {
+                // Ask user
+                var dialogResult = MessageBox.Show("Would you like to save current properties?", "Modified", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+                // Check for cancel
+                if (dialogResult == DialogResult.Cancel)
+                {
+                    // Halt flow
+                    e.Cancel = true;
+                }
+                else if (dialogResult == DialogResult.Yes)
+                {
+                    // Save current settings data
+                    this.SaveSettingsData(true);
+                }
+            }
         }
 
         /// <summary>
@@ -167,7 +206,11 @@ namespace nkDotEditor
         /// <param name="e">Event arguments.</param>
         private void OnPropertyGridPropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
-            // TODO Add code
+            // Set isSaved flag
+            this.isSaved = false;
+
+            // Update to reflect flag
+            this.UpdateSavedLabel();
         }
 
         /// <summary>
