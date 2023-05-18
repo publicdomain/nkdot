@@ -26,6 +26,10 @@ namespace nkDotEditor
         /// <value>The associated icon.</value>
         private Icon associatedIcon = null;
 
+        /// <summary>
+        /// The is saved.
+        /// </summary>
+        private bool? isSaved = null;
 
         /// <summary>
         /// The settings data.
@@ -164,6 +168,52 @@ namespace nkDotEditor
         private void OnPropertyGridPropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
             // TODO Add code
+        }
+
+        /// <summary>
+        /// Updates the saved label.
+        /// </summary>
+        private void UpdateSavedLabel()
+        {
+            // Declare saved label text
+            string savedLabelText = "-";
+
+            // Declare saved label color
+            Color savedLabelColor = Color.Black;
+
+            // Act upon isSaved flag
+            switch (this.isSaved)
+            {
+                // Saved
+                case true:
+
+                    savedLabelText = "yes";
+                    savedLabelColor = Color.Green;
+
+                    break;
+
+                // Not saved
+                case false:
+
+                    savedLabelText = "no";
+                    savedLabelColor = Color.Red;
+
+                    break;
+
+                    /* UNDONE By initially set values
+                     // Same
+                    case null:
+
+                        savedLabelText = "-";
+                        savedLabelColor = Color.Black;
+
+                        break;
+                        */
+            }
+
+            // Update saved label
+            this.savedToolStripStatusLabel.ForeColor = savedLabelColor;
+            this.savedToolStripStatusLabel.Text = savedLabelText;
         }
 
         /// <summary>
