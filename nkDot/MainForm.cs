@@ -20,12 +20,6 @@ namespace nkDot
     public partial class MainForm : Form
     {
         /// <summary>
-        /// Gets or sets the associated icon.
-        /// </summary>
-        /// <value>The associated icon.</value>
-        private Icon associatedIcon = null;
-
-        /// <summary>
         /// The settings data.
         /// </summary>
         private SettingsData settingsData = null;
@@ -42,6 +36,18 @@ namespace nkDot
         {
             // The InitializeComponent() call is required for Windows Forms designer support.
             this.InitializeComponent();
+
+            /* Settings data */
+
+            // Check for settings file
+            if (!File.Exists(this.settingsDataPath))
+            {
+                // Create new settings file
+                this.SaveSettingsFile(this.settingsDataPath, new SettingsData());
+            }
+
+            // Load settings from disk
+            this.settingsData = this.LoadSettingsFile(this.settingsDataPath);
         }
 
         /// <summary>
@@ -89,6 +95,32 @@ namespace nkDot
 
                 // Return populated settings data
                 return xmlSerializer.Deserialize(fileStream) as SettingsData;
+            }
+        }
+
+        /// <summary>
+        /// Saves the settings file.
+        /// </summary>
+        /// <param name="settingsFilePath">Settings file path.</param>
+        /// <param name="settingsDataParam">Settings data parameter.</param>
+        private void SaveSettingsFile(string settingsFilePath, SettingsData settingsDataParam)
+        {
+            try
+            {
+                // Use stream writer
+                using (StreamWriter streamWriter = new StreamWriter(settingsFilePath, false))
+                {
+                    // Set xml serialzer
+                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(SettingsData));
+
+                    // Serialize settings data
+                    xmlSerializer.Serialize(streamWriter, settingsDataParam);
+                }
+            }
+            catch (Exception exception)
+            {
+                // Advise user
+                MessageBox.Show($"Error saving settings file.{Environment.NewLine}{Environment.NewLine}Message:{Environment.NewLine}{exception.Message}", "File error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
