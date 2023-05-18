@@ -67,5 +67,11 @@
   <ItemGroup>
     <Folder Include="Resources" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\nkDotEditor\nkDotEditor.csproj">
+      <Project>{9857D1B8-3099-4DB0-952C-9B95347FD4C7}</Project>
+      <Name>nkDotEditor</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

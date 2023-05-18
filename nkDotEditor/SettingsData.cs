@@ -2,13 +2,13 @@
 using System.ComponentModel;
 using System.Drawing;
 
-namespace nkDotEditor
+namespace PublicDomain
 {
     /// <summary>
     /// Nk dot properties.
     /// </summary>
     [DefaultPropertyAttribute("DotColor")]
-    public class NkDotProperties
+    public class SettingsData
     {
         /// <summary>
         /// Gets or sets the color of the dot.
@@ -76,6 +76,6 @@ namespace nkDotEditor
         /// <summary>
         /// Initializes a new instance of the <see cref="T:nkDotEditor.Customer"/> class.
         /// </summary>
-        public NkDotProperties() { }
+        public SettingsData() { }
     }
 }
