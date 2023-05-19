@@ -59,6 +59,26 @@ namespace nkDotEditor
 
             /* Settings data */
 
+            // Load settings data
+            this.LoadSettingsData(false);
+
+            // Initial update
+            this.UpdateSavedLabel();
+        }
+
+        /// <summary>
+        /// Loads the settings data.
+        /// </summary>
+        /// <param name="afresh">If set to <c>true</c> afresh.</param>
+        private void LoadSettingsData(bool afresh)
+        {
+            // TODO Make new settings data file [Flow can be improved]
+            if (afresh)
+            {
+                // Create new settings file
+                this.SaveSettingsFile(this.settingsDataPath, new SettingsData());
+            }
+
             // Check for settings file
             if (!File.Exists(this.settingsDataPath))
             {
@@ -72,8 +92,8 @@ namespace nkDotEditor
             // Assign settings data to property grid
             this.propertyGrid.SelectedObject = this.settingsData;
 
-            // Initial update
-            this.UpdateSavedLabel();
+            // Refresh property grid
+            this.propertyGrid.Refresh();
         }
 
         /// <summary>
