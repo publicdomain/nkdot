@@ -132,7 +132,8 @@ namespace nkDotEditor
         /// <param name="e">Event arguments.</param>
         private void OnSourceCodeGithubcomToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code 
+            // Open GitHub repository
+            Process.Start("https://github.com/publicdomain/nkdot");
         }
 
         /// <summary>
@@ -142,7 +143,7 @@ namespace nkDotEditor
         /// <param name="e">Event arguments.</param>
         private void OnAboutToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            TODO Add code
         }
 
         /// <summary>
