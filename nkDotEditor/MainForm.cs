@@ -93,7 +93,8 @@ namespace nkDotEditor
         /// <param name="e">Event arguments.</param>
         private void OnSaveToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Save current settings data
+            this.SaveSettingsData(true);
         }
 
         /// <summary>
