@@ -61,39 +61,6 @@ namespace nkDotEditor
 
             // Load settings data
             this.LoadSettingsData(false);
-
-            // Initial update
-            this.UpdateSavedLabel();
-        }
-
-        /// <summary>
-        /// Loads the settings data.
-        /// </summary>
-        /// <param name="afresh">If set to <c>true</c> afresh.</param>
-        private void LoadSettingsData(bool afresh)
-        {
-            // TODO Make new settings data file [Flow can be improved]
-            if (afresh)
-            {
-                // Create new settings file
-                this.SaveSettingsFile(this.settingsDataPath, new SettingsData());
-            }
-
-            // Check for settings file
-            if (!File.Exists(this.settingsDataPath))
-            {
-                // Create new settings file
-                this.SaveSettingsFile(this.settingsDataPath, new SettingsData());
-            }
-
-            // Load settings from disk
-            this.settingsData = this.LoadSettingsFile(this.settingsDataPath);
-
-            // Assign settings data to property grid
-            this.propertyGrid.SelectedObject = this.settingsData;
-
-            // Refresh property grid
-            this.propertyGrid.Refresh();
         }
 
         /// <summary>
@@ -103,7 +70,8 @@ namespace nkDotEditor
         /// <param name="e">Event arguments.</param>
         private void OnNewToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Load settings data afresh
+            this.LoadSettingsData(true);
         }
 
         /// <summary>
@@ -115,22 +83,6 @@ namespace nkDotEditor
         {
             // Save current settings data
             this.SaveSettingsData(true);
-        }
-
-        /// <summary>
-        /// Saves the settings data.
-        /// </summary>
-        /// <param name="isSavedFlag">If set to <c>true</c> is saved flag.</param>
-        private void SaveSettingsData(bool isSavedFlag)
-        {
-            // Create new settings file
-            this.SaveSettingsFile(this.settingsDataPath, this.settingsData);
-
-            // Set flag
-            this.isSaved = isSavedFlag;
-
-            // Update label
-            this.UpdateSavedLabel();
         }
 
         /// <summary>
@@ -285,6 +237,58 @@ namespace nkDotEditor
             // Update saved label
             this.savedToolStripStatusLabel.ForeColor = savedLabelColor;
             this.savedToolStripStatusLabel.Text = savedLabelText;
+        }
+
+        /// <summary>
+        /// Loads the settings data.
+        /// </summary>
+        /// <param name="afresh">If set to <c>true</c> afresh.</param>
+        private void LoadSettingsData(bool afresh)
+        {
+            // TODO Make new settings data file [Flow can be improved]
+            if (afresh)
+            {
+                // Create new settings file
+                this.SaveSettingsFile(this.settingsDataPath, new SettingsData());
+            }
+
+            // Check for settings file
+            if (!File.Exists(this.settingsDataPath))
+            {
+                // Create new settings file
+                this.SaveSettingsFile(this.settingsDataPath, new SettingsData());
+            }
+
+            // Load settings from disk
+            this.settingsData = this.LoadSettingsFile(this.settingsDataPath);
+
+            // Assign settings data to property grid
+            this.propertyGrid.SelectedObject = this.settingsData;
+
+            // Refresh property grid
+            this.propertyGrid.Refresh();
+
+            // Set isSaved flag
+            this.isSaved = null;
+
+            // Update to reflect flag
+            this.UpdateSavedLabel();
+        }
+
+        /// <summary>
+        /// Saves the settings data.
+        /// </summary>
+        /// <param name="isSavedFlag">If set to <c>true</c> is saved flag.</param>
+        private void SaveSettingsData(bool isSavedFlag)
+        {
+            // Create new settings file
+            this.SaveSettingsFile(this.settingsDataPath, this.settingsData);
+
+            // Set flag
+            this.isSaved = isSavedFlag;
+
+            // Update label
+            this.UpdateSavedLabel();
         }
 
         /// <summary>
