@@ -176,7 +176,7 @@ namespace nkDotEditor
             var aboutForm = new AboutForm(
                 $"About {programTitle}",
                 $"{programTitle} {version.Major}.{version.Minor}.{version.Build}",
-                $"Made for: nkormanik{Environment.NewLine}DonationCoder.com{Environment.NewLine}Day #139, Week #20 @ May 19, 2023",
+                $"Made for: nkormanik{Environment.NewLine}DonationCoder.com{Environment.NewLine}Day #140, Week #20 @ May 20, 2023",
                 licenseText,
                 this.Icon.ToBitmap())
             {
