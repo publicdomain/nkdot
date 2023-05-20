@@ -46,6 +46,7 @@ namespace nkDot
 			this.dotPictureBox.Size = new System.Drawing.Size(624, 442);
 			this.dotPictureBox.TabIndex = 0;
 			this.dotPictureBox.TabStop = false;
+			this.dotPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.OnDotPictureBoxPaint);
 			// 
 			// dotTimer
 			// 

@@ -9,6 +9,7 @@ namespace nkDot
     using System;
     using System.Collections.Generic;
     using System.Drawing;
+    using System.Drawing.Drawing2D;
     using System.IO;
     using System.Windows.Forms;
     using System.Xml.Serialization;
@@ -30,6 +31,16 @@ namespace nkDot
         private string settingsDataPath = $"nkDot-SettingsData.txt";
 
         /// <summary>
+        /// The dot brush.
+        /// </summary>
+        private Brush dotBrush = null;
+
+        /// <summary>
+        /// The dot rectangle.
+        /// </summary>
+        private Rectangle dotRectangle;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="T:nkDot.MainForm"/> class.
         /// </summary>
         public MainForm()
@@ -48,6 +59,16 @@ namespace nkDot
 
             // Load settings from disk
             this.settingsData = this.LoadSettingsFile(this.settingsDataPath);
+        }
+
+        /// <summary>
+        /// Handles the dot picture box paint.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
+        private void OnDotPictureBoxPaint(object sender, PaintEventArgs e)
+        {
+            // TODO Add code
         }
 
         /// <summary>
@@ -123,5 +144,6 @@ namespace nkDot
                 MessageBox.Show($"Error saving settings file.{Environment.NewLine}{Environment.NewLine}Message:{Environment.NewLine}{exception.Message}", "File error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
     }
 }
