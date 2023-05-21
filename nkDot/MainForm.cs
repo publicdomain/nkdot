@@ -115,6 +115,10 @@ namespace nkDot
         {
             // Set topmost
             this.TopMost = this.settingsData.AlwaysOnTop;
+
+            // Activate timers
+            this.dotTimer.Enabled = true;
+            this.runTimer.Enabled = true;
         }
 
         /// <summary>
@@ -124,7 +128,8 @@ namespace nkDot
         /// <param name="e">Event arguments.</param>
         private void OnDotTimerTick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Set dot rectangle
+            this.SetDotRectangle();
         }
 
         /// <summary>
