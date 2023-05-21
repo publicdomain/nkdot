@@ -88,7 +88,8 @@ namespace nkDot
         /// </summary>
         private void SetDotRectangle()
         {
-            // TODO Add code
+            // New dot rectangle using settings data
+            this.dotRectangle = new Rectangle(Randoms.Next(0, this.dotPictureBox.Width - this.settingsData.DotSize), Randoms.Next(0, this.dotPictureBox.Height - this.settingsData.DotSize), this.settingsData.DotSize, this.settingsData.DotSize);
         }
 
         /// <summary>
