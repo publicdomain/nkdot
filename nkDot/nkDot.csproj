@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
     </Reference>
+    <Reference Include="MersenneTwister">
+      <HintPath>Resources\MersenneTwister.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainForm.cs" />
@@ -58,6 +61,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Resources\fire-indicator-98595_black-frame_256.ico" />
+    <None Include="Resources\MersenneTwister.dll" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">

@@ -13,6 +13,7 @@ namespace nkDot
     using System.IO;
     using System.Windows.Forms;
     using System.Xml.Serialization;
+    using MersenneTwister;
     using PublicDomain;
 
     /// <summary>
@@ -59,6 +60,35 @@ namespace nkDot
 
             // Load settings from disk
             this.settingsData = this.LoadSettingsFile(this.settingsDataPath);
+
+            // Set background
+            this.dotPictureBox.BackColor = this.settingsData.BackgroundColor;
+
+            // Set dot brush
+            this.dotBrush = new SolidBrush(this.settingsData.DotColor);
+
+            // Set dot rectangle
+            this.SetDotRectangle();
+
+            // Set size
+            this.ClientSize = this.settingsData.Size;
+
+            // Set location
+            this.Location = this.settingsData.Location;
+
+            // Set dot timer interval
+            this.dotTimer.Interval = this.settingsData.RedrawInterval;
+
+            // Set run time
+            this.runTimer.Interval = this.settingsData.RunningTime;
+        }
+
+        /// <summary>
+        /// Sets the dot rectangle.
+        /// </summary>
+        private void SetDotRectangle()
+        {
+            // TODO Add code
         }
 
         /// <summary>
@@ -68,7 +98,11 @@ namespace nkDot
         /// <param name="e">E.</param>
         private void OnDotPictureBoxPaint(object sender, PaintEventArgs e)
         {
-            // TODO Add code
+            // Set smoothing mode
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // Draw the dot
+            e.Graphics.FillEllipse(this.dotBrush, this.dotRectangle);
         }
 
         /// <summary>
