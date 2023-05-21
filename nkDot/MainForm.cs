@@ -156,7 +156,11 @@ namespace nkDot
         /// <param name="e">Event arguments.</param>
         private void OnRunTimerTick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Disable
+            this.runTimer.Enabled = false;
+
+            // Exit program
+            this.Close();
         }
 
         /// <summary>
