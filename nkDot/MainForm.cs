@@ -81,6 +81,12 @@ namespace nkDot
 
             // Set run time
             this.runTimer.Interval = this.settingsData.RunningTime;
+
+            // Min size
+            this.MinimumSize = new Size(this.settingsData.DotSize + 3, this.settingsData.DotSize + 3);
+
+            // Maximized
+            this.WindowState = this.settingsData.Maximized ? FormWindowState.Maximized : FormWindowState.Normal;
         }
 
         /// <summary>
@@ -88,8 +94,16 @@ namespace nkDot
         /// </summary>
         private void SetDotRectangle()
         {
-            // New dot rectangle using settings data
-            this.dotRectangle = new Rectangle(Randoms.Next(0, this.dotPictureBox.Width - this.settingsData.DotSize), Randoms.Next(0, this.dotPictureBox.Height - this.settingsData.DotSize), this.settingsData.DotSize, this.settingsData.DotSize);
+            try
+            {
+                // New dot rectangle using settings data
+                this.dotRectangle = new Rectangle(Randoms.Next(0, this.dotPictureBox.Width - this.settingsData.DotSize), Randoms.Next(0, this.dotPictureBox.Height - this.settingsData.DotSize), this.settingsData.DotSize, this.settingsData.DotSize);
+            }
+            catch (Exception ex)
+            {
+                // Let it fall through
+                ;
+            }
         }
 
         /// <summary>
@@ -130,6 +144,9 @@ namespace nkDot
         {
             // Set dot rectangle
             this.SetDotRectangle();
+
+            // INvalidate
+            this.dotPictureBox.Invalidate();
         }
 
         /// <summary>
